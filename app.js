@@ -21,12 +21,12 @@ weatherApp.config(['$routeProvider', function ($routeProvider) {
 
 // CONTROLLERS
 
-weatherApp.controller('homeController', ['$scope', '$location', function($scope, $location) {
+weatherApp.controller('homeController', ['$scope', function($scope) {
     
     
 
 }]);
 
-weatherApp.controller('forcastController', ['$scope', '$location','$routeParams', function($scope, $location, $routeParams) {
+weatherApp.controller('forcastController', ['$scope','$routeParams', function($scope, $routeParams) {
 
 }]);
