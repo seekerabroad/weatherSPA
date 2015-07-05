@@ -19,14 +19,30 @@ weatherApp.config(['$routeProvider', function ($routeProvider) {
    
 }]);
 
+// SERVICES
+// CUSTOM SERVICES
+weatherApp.service( 'weatherService', [ function(){
+
+	this.cityName = '';
+	
+}])
+
 // CONTROLLERS
 
-weatherApp.controller('homeController', ['$scope', function($scope) {
+weatherApp.controller('homeController', ['$scope','weatherService', function($scope, weatherService) {
     
-    
+    $scope.city = weatherService.cityName;
+    // watches name binding and updates custom serice singleton on change event
+    $scope.$watch('city', function() {
+    	weatherService.cityName = $scope.city;
+    })
 
 }]);
 
-weatherApp.controller('forcastController', ['$scope','$routeParams', function($scope, $routeParams) {
+
+
+weatherApp.controller('forcastController', ['$scope','weatherService', function($scope, weatherService) {
+
+	$scope.city = weatherService.cityName;
 
 }]);
