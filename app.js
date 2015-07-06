@@ -21,7 +21,7 @@ weatherApp.config(['$routeProvider', function ($routeProvider) {
 
 // SERVICES
 // CUSTOM SERVICES
-weatherApp.service( 'weatherService', [ function(){
+weatherApp.service( 'cityService', [ function(){
 
 	this.cityName = '';
 	
@@ -29,20 +29,42 @@ weatherApp.service( 'weatherService', [ function(){
 
 // CONTROLLERS
 
-weatherApp.controller('homeController', ['$scope','weatherService', function($scope, weatherService) {
+weatherApp.controller('homeController', ['$scope', 'cityService', function($scope, cityService) {
     
-    $scope.city = weatherService.cityName;
+    $scope.city = cityService.cityName;
+
     // watches name binding and updates custom serice singleton on change event
     $scope.$watch('city', function() {
-    	weatherService.cityName = $scope.city;
+    	cityService.cityName = $scope.city;
     })
 
 }]);
 
 
 
-weatherApp.controller('forcastController', ['$scope','weatherService', function($scope, weatherService) {
+weatherApp.controller('forcastController', ['$scope', '$resource', 'cityService', function($scope, $resource, cityService) {
 
-	$scope.city = weatherService.cityName;
+	$scope.city = cityService.cityName;
+
+	// gets the weather api json data and makes it available to the scope. callback verifies the get to the browser
+    $scope.weatherAPI = $resource("http://api.openweathermap.org/data/2.5/forecast/daily", { callback: "JSON_CALLBACK" }, { get: { method: "JSONP"}});
+
+    $scope.weatherResult = $scope.weatherAPI.get({ q: $scope.city, cnt: 2 });
+
+    // converts degrees Kelvin to Farenheit
+    // $scope.convertToFahrenheit = function(degK) {
+    // 	return Math.round((1.8 * (degK -273)) + 32);
+    // }
+
+    // converts degrees Kelvin to Celsius
+    $scope.convertToCelsius = function(degK) {
+    	return Math.round(degK - 273.15);
+    }
+
+    // converts timestamp to date
+    $scope.convertToDate = function(dt) {
+    	return new Date(dt * 1000);
+    }
+
 
 }]);
