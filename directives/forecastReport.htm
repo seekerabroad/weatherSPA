@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<!-- REMEMBER: as this scope is now coming via a directive, an object map must be passed in -->
+		<h3 class="panel-title">{{ convertToDate({ dt: forecastDay.dt }) | date: dateFormat }}</h3>
+	</div>
+	<div class="panel-body">
+		<!-- REMEMBER: as this scope is now coming via a directive, an object map must be passed in -->
+		Daytime temperature: {{ convertToStandard( { daytimeTemp: forecastDay.temp.day } )}}C
+	</div>
+</div>

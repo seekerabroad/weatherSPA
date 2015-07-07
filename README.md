@@ -1,2 +1,2 @@
 # weatherSPA
-A weather forecast single page application coded using angularJS 
+A weather forecast single page demo application coded using angularJS 
