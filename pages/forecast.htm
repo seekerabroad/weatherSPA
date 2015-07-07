@@ -1,6 +1,12 @@
-<h1>Forcast</h1>
+<p>
+	<a href="#/">Back to Search</a>
+</p>
+<h1>Forecast</h1>
 
-<h3>Weather forcast for : {{ city }}</h3>
+<h3>Weather forecast for : {{ city }}</h3>
+<hr />
+<days-count></days-count>
+<hr />
 
 <div ng-repeat="w in weatherResult.list">
 	<div class="row">
@@ -10,7 +16,7 @@
 					<h3 class="panel-title">{{ convertToDate(w.dt) | date: 'EEE d MMM, y' }}</h3>
 				</div>
 				<div class="panel-body">
-					Daytime temperature: {{ convertToCelsius(w.temp.day)}}
+					Daytime temperature: {{ convertToCelsius(w.temp.day)}}C
 				</div>
 			</div>
 		</div>
