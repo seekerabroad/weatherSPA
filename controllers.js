@@ -1,6 +1,6 @@
 // CONTROLLERS
 
-weatherApp.controller('homeController', ['$scope', 'cityService', function($scope, cityService) {
+weatherApp.controller('homeController', ['$scope', '$location', 'cityService', function($scope, $location, cityService) {
     
     $scope.city = cityService.cityName;
 
@@ -8,6 +8,10 @@ weatherApp.controller('homeController', ['$scope', 'cityService', function($scop
     $scope.$watch('city', function() {
     	cityService.cityName = $scope.city;
     })
+    // using the location service, this function routes the user to the forecast page when submit is clicked
+    $scope.submit = function() {
+        $location.path("/forecast");
+    };
 
 }]);
 
